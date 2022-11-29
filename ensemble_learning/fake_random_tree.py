@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 29 14:17:12 2022
-
-@author: Johnson
-"""
 
 #implement a "fake" random tree using a bagging tree
 #for each bagged decision tree, sample a random column of features
@@ -116,8 +110,6 @@ class FakeRandomTreeRegressor:
         return np.mean(yhat == Y)
     
     
-    
-    
 model = FakeRandomTreeRegressor(n_trees = 10)
 model = FakeRandomTreeRegressor(n_trees = 1000)
 
@@ -126,23 +118,3 @@ model.fit(Xtrain, Ytrain)
 model.predict(Xtest)
 model.score(Xtest, Ytest)
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
