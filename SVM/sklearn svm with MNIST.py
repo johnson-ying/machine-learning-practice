@@ -1,4 +1,3 @@
-```python
 # classification using sklearn svm API
 
 import numpy as np
@@ -26,4 +25,3 @@ model.fit(train_X, train_y)
 # train/test scores
 print("train score:", model.score(train_X, train_y), "duration:", datetime.now() - t0)
 print("test score:", model.score(test_X, test_y), "duration:", datetime.now() - t0)
-```
