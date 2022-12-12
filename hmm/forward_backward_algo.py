@@ -19,7 +19,7 @@ A /= np.sum(A, axis = 1, keepdims=True)
 
 #hidden-observation matrix
 B = np.random.randint(low=1,high=100,size=(M,K)).astype('float') 
-B /= np.sum(B, axis = 0, keepdims=True)
+B /= np.sum(B, axis = 1, keepdims=True)
 
 #create random sequence of observations
 sequence = np.random.choice(K, size = T, replace = True)
