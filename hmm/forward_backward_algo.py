@@ -52,8 +52,8 @@ def backward(s, pi, A, B):
     betas.append(1)
     
     #induction steps
-    for t in range(len(s)-1):
-        tmp = A.dot( B[:,s[T-t]]) * betas[-1] #1 x M
+    for t in range(T-2, -1, -1)
+        tmp = A.dot( B[:,s[t]]) * betas[-1] #1 x M
         betas.append(tmp)
     betas.reverse()
     return betas
