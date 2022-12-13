@@ -49,11 +49,11 @@ def backward(s, pi, A, B):
     T = len(s) - 1
     
     #initialization step
-    betas.append(1)
+    betas.append(np.ones((M)))
     
     #induction steps
     for t in range(T-2, -1, -1)
-        tmp = A.dot( B[:,s[t]]) * betas[-1] #1 x M
+        tmp = A.dot( B[:,s[t]] * betas[-1]) #1 x M
         betas.append(tmp)
     betas.reverse()
     return betas
