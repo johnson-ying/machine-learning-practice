@@ -99,3 +99,32 @@ plt.gray()
 plt.subplot(122)
 plt.imshow(pred)
 
+
+#using this transformed latent representation, could you do classification effectively?
+latent /= np.max(latent, axis = 1, keepdims = True)
+Xtrain2, Ytrain2 = latent[:40000,:], Ytrain[:40000]
+Xtest2, Ytest2 = latent[40000:,:], Ytrain[40000:]
+
+N, D = Xtrain2.shape
+K = len(set(Ytrain2))
+
+#model
+i = Input(shape = (D,))
+x = Dense(50, activation = 'relu')(i)
+x = Dense(30, activation = 'relu')(x)
+x = Dense(K, activation = 'softmax')(x)
+
+model = Model(inputs = i, outputs = x)
+
+model.compile(
+    loss='SparseCategoricalCrossentropy',
+  optimizer='Adam',
+  metrics=['accuracy']
+)
+
+r = model.fit(Xtrain2, Ytrain2, validation_data=(Xtest2, Ytest2), epochs=20, batch_size=200)
+
+# accuracy
+plt.plot(r.history['accuracy'], label='train')
+plt.plot(r.history['val_accuracy'], label='test')
+plt.legend()
