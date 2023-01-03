@@ -111,7 +111,7 @@ class ANN():
         plt.plot(self.costs)
         
 
-model = ANN(total_vocab, 10) #hidden dimension 40 
+model = ANN(total_vocab, 40) #hidden dimension 40 
 
 model.fit(X, Y, lr = 0.3, n_iter = 5)
 
