@@ -2,12 +2,13 @@ Continutation of nlp_pt_1
 
 NLP with deep learning
 
-* note: many codes are unrefined (particularly in word2vec and GloVe), and unoptimized when it comes to training. goal was just to learn about and practice implementing diff techniques. At the moment, don't recommend using any of this for actual applications.
+* note 1: word2vec section is unrefined and unoptimized when it comes to training. goal was just to practice implementation. 
+* note 2: word2vec and GloVe only implemented in numpy.
 
 **Focus:**
 - Markov models extended to neural nets
-- word2vec
-- continuous bag of words
+- continuous bag of words 
 - skip-gram + word2vec
 - GloVe 
 - various RNN architectures for NLP usage
+- HMM for NLP usage (where hidden states are known, so no training is simply counting states and no expectation-maximization)  
