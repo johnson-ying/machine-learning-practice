@@ -136,17 +136,17 @@ def custom_loss(targ, pred):
     return -K.sum(out) / K.sum(target_mask) #return the mean cost
 
 def custom_acc(targ, pred):
-  # target and pred are both size N x T x total_labels
-  # take the argmax along the 3rd dimension
-  targ = K.argmax(targ, axis=-1) #N x T
-  pred = K.argmax(pred, axis=-1) #N x T
-  correct = K.cast(K.equal(targ, pred), dtype='float32') #N x T
+    # target and pred are both size N x T x total_labels
+    # take the argmax along the 3rd dimension
+    targ = K.argmax(targ, axis=-1) #N x T
+    pred = K.argmax(pred, axis=-1) #N x T
+    correct = K.cast(K.equal(targ, pred), dtype='float32') #N x T
 
-  # discount all the 0 padded values
-  target_mask = K.cast(targ > 0, dtype='float32') # N x T
-  n_correct = K.sum(target_mask * correct)
-  n_total = K.sum(target_mask)
-  return n_correct / n_total
+    # discount all the 0 padded values
+    target_mask = K.cast(targ > 0, dtype='float32') # N x T
+    n_correct = K.sum(target_mask * correct)
+    n_total = K.sum(target_mask)
+    return n_correct / n_total
 
 model.compile(optimizer = 'adam',
               loss = custom_loss,
