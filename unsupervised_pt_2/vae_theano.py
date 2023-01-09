@@ -135,6 +135,7 @@ class VAE():
         #implement adam or anything that has adaptive learning rates
         beta1 = 0.9
         beta2 = 0.99
+        t = 1
         first_moments = [theano.shared(np.ones_like(p.get_value())) for p in self.params]
         second_moments = [theano.shared(np.ones_like(p.get_value())) for p in self.params]
         
@@ -142,8 +143,8 @@ class VAE():
         new_second_moments = [beta2 * moment2 + (1-beta2) * g * g for moment2, g in zip(second_moments, grads)]
         
         #bias correction
-        first_moments_cor = [moment1 / (1 - beta1 ** 2) for moment1 in new_first_moments]
-        second_moments_cor = [moment2 / (1 - beta2 ** 2) for moment2 in new_second_moments]
+        first_moments_cor = [moment1 / (1 - beta1 ** t) for moment1 in new_first_moments]
+        second_moments_cor = [moment2 / (1 - beta2 ** t) for moment2 in new_second_moments]
 
         updates = [
             (m1, new_m1) for m1, new_m1 in zip(first_moments, new_first_moments)
@@ -152,7 +153,9 @@ class VAE():
         ] + [
             (p, p - lr * m/T.sqrt(v + 1e-10)) for p, m, v in zip(self.params, first_moments_cor, second_moments_cor)
         ]
-
+        
+        t += 1
+        
         #train op
         train_op = theano.function(inputs = [thX],
                                    updates = updates,
