@@ -64,6 +64,7 @@ vv = 0
 vc = 0
 
 epsilon = 1e-9
+t = 1
 
 W = np.random.randn(D,M)/np.sqrt(M)
 b = np.zeros((M))
@@ -122,21 +123,23 @@ for i in range(n_iter):
         vb = beta2 * vb + (1-beta2) * grad_b * grad_b
         
         #bias correction
-        mv_hat = mv / (1 - beta1 ** 2)
-        mc_hat = mc / (1 - beta1 ** 2)
-        mw_hat = mw / (1 - beta1 ** 2)
-        mb_hat = mb / (1 - beta1 ** 2)
+        mv_hat = mv / (1 - beta1 ** t)
+        mc_hat = mc / (1 - beta1 ** t)
+        mw_hat = mw / (1 - beta1 ** t)
+        mb_hat = mb / (1 - beta1 ** t)
         
-        vv_hat = vv / (1 - beta2 ** 2)
-        vc_hat = vc / (1 - beta2 ** 2)
-        vw_hat = vw / (1 - beta2 ** 2)
-        vb_hat = vb / (1 - beta2 ** 2)
+        vv_hat = vv / (1 - beta2 ** t)
+        vc_hat = vc / (1 - beta2 ** t)
+        vw_hat = vw / (1 - beta2 ** t)
+        vb_hat = vb / (1 - beta2 ** t)
         
         #update params
         V += lr * mv_hat / np.sqrt(vv_hat + epsilon)
         c += lr * mc_hat / np.sqrt(vc_hat + epsilon)
         W += lr * mw_hat / np.sqrt(vw_hat + epsilon)
         b += lr * mb_hat / np.sqrt(vb_hat + epsilon)
+    
+        t += 1
     
 plt.plot(costs)
 
