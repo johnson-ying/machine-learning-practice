@@ -244,7 +244,7 @@ print(translate_a_sentence(X[0:1,:]))
 
 
 
-#generate 4 lines of poetry
+#translate a random sentence
 def random_translation():
     idx = np.random.randint(len(X))
     print(original_sentence(X[idx:idx+1,:]))
